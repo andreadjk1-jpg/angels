@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="כל השמות שבארכיון, מחולקים לעשרה גלגלים ולשתי הרחבות. שמות עבריים בלבד, ללא ציורים."/>
+<title>ספר השמות לפי הגלגלים</title>
+<style>
+  :root{color-scheme:light;--paper:#faf7ef;--ink:#29251e;--line:#d9ceba;--accent:#77603a}
+  *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{background:var(--paper);color:var(--ink);font:20px/1.6 "Times New Roman","David",serif;margin:0}
+  main{max-width:1350px;padding:40px 28px 80px;margin:auto}header{border-bottom:2px solid var(--ink);padding-bottom:26px;margin-bottom:30px}
+  h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:normal;margin:0 0 10px}header p{margin:8px 0;color:var(--accent)}a{color:inherit}summary{cursor:pointer}details{font-size:.86rem}
+  .sphere-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}.sphere-nav a{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);text-decoration:none;padding:8px 12px;border-radius:3px;font-size:.95rem;min-width:0;overflow-wrap:anywhere}.sphere-nav a:hover,.sphere-nav a:focus{background:#e9dfcb}.sphere-nav span{font-size:.8rem;color:var(--accent);flex-shrink:0}
+  .zodiac-audit{max-width:920px;margin-top:18px}.zodiac-audit p{font-size:.95rem}.sphere-section{margin-top:38px}h2{font-size:1.6rem;font-weight:normal;border-bottom:1px solid var(--line);margin:0 0 12px;padding-bottom:6px;display:flex;justify-content:space-between;gap:10px;align-items:start}h2 span{min-width:0;overflow-wrap:anywhere}h2 a{font-size:1.05rem;text-decoration:none;padding:5px 12px}
+  .group-meta,.astronomy-note{font-size:.9rem;color:var(--accent);margin:5px 0}.chambers{margin:10px 0 18px}.chambers p{font-size:.85rem}
+  .entries{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}.entry{border:1px solid var(--line);border-radius:4px;padding:14px 16px;background:#fffdf7;min-width:0;break-inside:avoid}
+  .entry-head{display:flex;align-items:start;justify-content:space-between;gap:14px}.entry h3{font-size:1.4rem;line-height:1.65;font-weight:normal;margin:0;overflow-wrap:anywhere;min-width:0;unicode-bidi:isolate}.gematria{font-size:.8rem;color:var(--accent);padding-top:8px;flex-shrink:0;direction:ltr}
+  .kind,.tables{font-size:.78rem;color:var(--accent);margin:6px 0}.provenance{border-top:1px solid var(--line);padding-top:8px;margin-top:10px}.provenance p{font-size:.83rem;overflow-wrap:anywhere}.spellings{unicode-bidi:plaintext}.related a{white-space:normal}
+  footer{border-top:1px solid var(--line);padding-top:20px;margin-top:40px;font-size:.9rem;color:var(--accent)}:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  @media(max-width:950px){.entries,.sphere-nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:600px){main{padding:24px 13px 55px}.entries,.sphere-nav{grid-template-columns:minmax(0,1fr)}.entry{padding:13px}h2{font-size:1.4rem}}
+  @media print{html{scroll-behavior:auto}body{background:#fff;color:#000;font-size:12pt}main{max-width:none;padding:0}.sphere-nav,.zodiac-audit,h2 a,.provenance,.chambers,footer{display:none}header{margin-bottom:12px;padding-bottom:12px}.entries{display:block;columns:2;column-gap:10mm}.entry{background:#fff;display:inline-block;width:100%;margin-bottom:4mm;break-inside:avoid;padding:3mm;border-color:#bbb}.entry h3{font-size:14pt}.sphere-section{margin-top:6mm}h2{break-after:avoid;font-size:18pt}.kind,.tables,.group-meta,.astronomy-note{color:#333}a{color:#000;text-decoration:none}}
+</style>
+</head>
+<body>
+<main id="top">
+<header>
+  <h1>ספר השמות לפי הגלגלים</h1>
+  <p>עשרה גלגלים ושתי הרחבות · <!-- ENTRY_COUNT --> כתיבים נפרדים · <!-- MEMBERSHIP_COUNT --> הופעות בקבוצות</p>
+  <p>שמות מלאכים, רוחות, שמות מחושבים ושמות קודש, לפי הטבלאות הקשורות אליהם.</p>
+  <p>כל שם מופיע פעם אחת בכל קבוצה מתאימה. שם המשותף לכמה קבוצות מופיע בכל אחת מהן.</p>
+  <nav class="sphere-nav" aria-label="מפתח הגלגלים וההרחבות"><!-- SPHERE_NAV --></nav>
+  <details class="zodiac-audit" id="zodiac-audit"><summary>בדיקת הזיקה לגלגל המזלות</summary>
+    <p>סדר עשרת הגלגלים תואם את הסדר המסורתי שבספר השני, פרק י״ג של אגריפה. שתי הקבוצות האחרונות הן הרחבות סמליות של הפרויקט.</p>
+    <p>הגלגל השני הוא גלגל הכוכבים והמזלות כולו. שבעת המאורות נעים ביחס למזלות, ומיקומם תלוי בתאריך ובשעה. לגלגל הראשון ולעולם היסודות אין מזל אסטרונומי קבוע.</p>
+    <p>החדרים המחושבים לפי מספר התאים בצלע הטבלה הם זיקות מספריות של הפרויקט. הם אינם מיקום נצפה בשמים. בגלגל בעל שתי טבלאות, לכל טבלה עשוי להיות חדר מספרי אחר.</p>
+    <p>שנים עשר המזלות האסטרולוגיים הם מגזרים של 30 מעלות. קבוצות הכוכבים האסטרונומיות הן אזורי שמים בעלי גבולות וגדלים שונים. מסלול השמש עובר בשלוש עשרה קבוצות כוכבים, ובהן נושא הנחש.</p>
+    <p>בקטלוג זה לא חושבו מיקומי כוכבי הלכת לתאריך מסוים.</p>
+    <p><a href="https://www.esotericarchives.com/agrippa/agripp2b.htm#chap13" rel="noopener noreferrer">אגריפה, הספר השני, פרק י״ג</a> · <a href="https://www.iau.org/IAU/IAU/Astronomy-FAQs/FAQs.aspx" rel="noopener noreferrer">האיגוד האסטרונומי הבין־לאומי: גלגל המזלות</a> · <a href="https://www.iau.org/IAU/Astronomy-FAQs/Constellations.aspx" rel="noopener noreferrer">גבולות קבוצות הכוכבים</a></p>
+  </details>
+</header>
+<!-- CATALOG_ENTRIES -->
+<footer><p>המספרים מתארים כתיבים וקשרים בארכיון. שמות קודש, מקהלות וספירות מסומנים לפי סוגם. שיוך לקבוצה מציין קשר לטבלאות הפרויקט.</p><a href="#top">חזרה לראש הדף ↑</a></footer>
+</main>
+</body>
+</html>

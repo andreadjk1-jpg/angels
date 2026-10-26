@@ -1,0 +1,87 @@
+{
+  "title": "Nome divino di 42 lettere · Ana Bekoach",
+  "source": "https://opensiddur.org/prayers/life-cycle/death/dying/ana-bkhoah-a-42-letter-name-piyyut-translated-by-reb-zalman/",
+  "form": "Acrostico di Ana Bekoach: sette gruppi di sei lettere.",
+  "orthographyNote": "Le forme finali ץ e ן sono conservate alla fine dei gruppi; per acrostico e sostituzioni valgono come צ e נ. Gematria ordinaria.",
+  "projectionNote": "Il tracciamento di questo Nome sulle tavole è una convenzione del progetto. La successiva derivazione lunare usa separatamente la colonna della Luna di Agrippa III.27.",
+  "full": {
+    "id": "full",
+    "label": "Nome completo di 42 lettere",
+    "hebrew": "אבגיתץ קרעשטן נגדיכש בטרצתג חקבטנע יגלפזק שקוצית",
+    "letters": 42,
+    "latin": "ʾ·b·g·y·t·ṣ / q·r·ʿ·š·ṭ·n / n·g·d·y·k·š / b·ṭ·r·ṣ·t·g / ḥ·q·b·ṭ·n·ʿ / y·g·l·p·z·q / š·q·v·ṣ·y·t",
+    "gematria": 3701
+  },
+  "groups": [
+    {
+      "id": "group-1",
+      "label": "Gruppo 1",
+      "number": 1,
+      "hebrew": "אבגיתץ",
+      "letters": 6,
+      "latin": "ʾ·b·g·y·t·ṣ",
+      "gematria": 506,
+      "prayer": "אנא בכח גדלת ימינך תתיר צרורה"
+    },
+    {
+      "id": "group-2",
+      "label": "Gruppo 2",
+      "number": 2,
+      "hebrew": "קרעשטן",
+      "letters": 6,
+      "latin": "q·r·ʿ·š·ṭ·n",
+      "gematria": 729,
+      "prayer": "קבל רנת עמך שגבנו טהרנו נורא"
+    },
+    {
+      "id": "group-3",
+      "label": "Gruppo 3",
+      "number": 3,
+      "hebrew": "נגדיכש",
+      "letters": 6,
+      "latin": "n·g·d·y·k·š",
+      "gematria": 387,
+      "prayer": "נא גבור דורשי יחודך כבבת שמרם"
+    },
+    {
+      "id": "group-4",
+      "label": "Gruppo 4",
+      "number": 4,
+      "hebrew": "בטרצתג",
+      "letters": 6,
+      "latin": "b·ṭ·r·ṣ·t·g",
+      "gematria": 704,
+      "prayer": "ברכם טהרם רחמי צדקתך תמיד גמלם"
+    },
+    {
+      "id": "group-5",
+      "label": "Gruppo 5",
+      "number": 5,
+      "hebrew": "חקבטנע",
+      "letters": 6,
+      "latin": "ḥ·q·b·ṭ·n·ʿ",
+      "gematria": 239,
+      "prayer": "חסין קדוש ברוב טובך נהל עדתך"
+    },
+    {
+      "id": "group-6",
+      "label": "Gruppo 6",
+      "number": 6,
+      "hebrew": "יגלפזק",
+      "letters": 6,
+      "latin": "y·g·l·p·z·q",
+      "gematria": 230,
+      "prayer": "יחיד גאה לעמך פנה זוכרי קדשתך"
+    },
+    {
+      "id": "group-7",
+      "label": "Gruppo 7",
+      "number": 7,
+      "hebrew": "שקוצית",
+      "letters": 6,
+      "latin": "š·q·v·ṣ·y·t",
+      "gematria": 906,
+      "prayer": "שועתנו קבל ושמע צעקתנו יודע תעלומות"
+    }
+  ]
+}

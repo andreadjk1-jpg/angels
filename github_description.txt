@@ -1,0 +1,10 @@
+=== GITHUB REPOSITORY DESCRIPTION (ABOUT) ===
+
+[English - Recommended]
+Deterministic computational engine for Cornelius Agrippa's cosmology, Kabbalistic angelology, and planetary magic squares (3x3 to 21x21). Features a zero-dependency static catalog of 2,100+ entities, Shem 42 generator, 28 Lunar Mansions, and Arabic Abjad comparative modules.
+
+[Italian]
+Motore computazionale deterministico per la cosmologia di Cornelio Agrippa, l'angelologia cabalistica e le tavole planetarie (3x3 - 21x21). Oltre 2.100 entità unificate, generatore Shem 42, 28 Mansioni Lunari ed estensione comparativa Abjad.
+
+=== TOPICS / TAGS (Da incollare sotto) ===
+agrippa, kabbalah, gematria, abjad, hermeticism, digital-humanities, procedural-generation, renaissance-philosophy, python, occult-philosophy

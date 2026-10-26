@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nome di 42 lettere · Generatore sulle 19 tavole</title>
+<style>
+  :root{color-scheme:dark;--bg:#0d1018;--panel:#171c28;--ink:#ece9df;--muted:#b7b7bb;--gold:#e2c881;--line:#383c47;--cyan:#7dd7ce}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,"Times New Roman",serif}
+  main{max-width:1180px;margin:auto;padding:30px 22px 70px}header{padding:10px 0 22px;border-bottom:1px solid var(--line)}
+  h1{font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.2;margin:7px 0 15px;color:var(--gold)}h2{font-size:1.15rem;color:var(--gold);margin:0 0 14px}
+  p{margin:10px 0}a{color:var(--gold)}.eyebrow{font:12px/1.6 system-ui;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .hebrew{font-family:"Times New Roman","David",serif;direction:rtl;unicode-bidi:isolate;overflow-wrap:anywhere}.source-name{font-size:clamp(1.2rem,3.8vw,1.75rem);line-height:1.9;color:var(--gold)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:22px;min-width:0}
+  .controls{display:grid;grid-template-columns:1.3fr 1fr 1fr .65fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+  label,button,input,select,.small,.toolbar,.stats,.empty{font-family:system-ui,sans-serif}label{font-size:.85rem;color:var(--muted)}
+  button,input,select{font-size:.9rem;color:var(--ink);background:#101621;border:1px solid #62616a;border-radius:6px;padding:9px 11px;max-width:100%}
+  input,select{width:100%;min-width:0}button{cursor:pointer}button:hover{border-color:var(--gold);background:#252a36}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  .primary{background:var(--gold);color:#18191d;border-color:var(--gold);font-weight:600}.primary:hover{background:#f1d99a;color:#18191d}
+  .toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:15px}.toolbar label{display:flex;align-items:center;gap:7px}.toolbar input[type=checkbox]{width:auto}
+  .search{flex:1 1 220px}.stats{display:flex;flex-wrap:wrap;gap:25px;color:var(--muted);font-size:.83rem;margin:18px 0}.stats strong{color:var(--gold);font-size:1.4rem;margin-right:5px}
+  .small{font-size:.8rem;color:var(--muted)}.error{color:#ffb7ad;font-family:system-ui}.results-wrap{overflow-x:auto}table.results{width:100%;border-collapse:collapse;table-layout:fixed}
+  .results th{font:.8rem system-ui;color:var(--muted);text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}.results td{padding:12px 10px;border-bottom:1px solid var(--line);overflow-wrap:anywhere;vertical-align:middle}
+  .results th:first-child{width:48%}.results .name{border:0;background:transparent;padding:0;color:var(--ink);font-size:1.3rem;text-align:right;line-height:1.65;white-space:normal;display:block;width:100%;overflow-wrap:anywhere}
+  .results .name:hover{color:var(--gold)}.meta{font:12px/1.5 system-ui;color:var(--muted)}.pure .meta{display:none}.pure .results th:first-child{width:100%}
+  details>summary{cursor:pointer;color:var(--gold)}.details-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+  .matrix-scroll{overflow-x:auto;padding:8px 0}.matrix-stage{position:relative;min-width:310px;max-width:520px;aspect-ratio:1;background:#101621}
+  .matrix{display:grid;position:absolute;inset:0}.cell{border:1px solid #303845;display:flex;align-items:center;justify-content:center;font-size:var(--cell-font,14px);color:#a4a7b1}.cell.active{color:var(--gold);background:#293d40}
+  .path{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.steps{max-height:540px;overflow:auto;padding-right:8px}.steps p{padding:5px 0;border-bottom:1px solid var(--line);font:13px/1.6 system-ui}
+  .detail-name{font-size:1.5rem;line-height:1.8}.empty{padding:30px 10px;text-align:center;color:var(--muted)}footer{margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}[hidden]{display:none!important}
+  @media(max-width:750px){main{padding:18px 12px 50px}.panel{padding:15px}.controls{grid-template-columns:1fr 1fr}.details-layout{grid-template-columns:minmax(0,1fr)}.results th:first-child{width:42%}.stats{gap:14px}.results td{padding:9px 5px}}
+  @media print{body{background:#fff;color:#000}header,.controls,.toolbar,.stats,footer,#s42Details,#methodNotes,.small,.error{display:none!important}.panel{border:0;padding:0}main{max-width:none;padding:0}.results .name{color:#000}.results td{break-inside:avoid;border-color:#ddd}.meta{color:#333}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="eyebrow">Nome di 42 lettere · Le tue diciannove tavole</div>
+  <h1>Generatore dei nomi dalle celle</h1>
+  <p class="source-name hebrew" dir="rtl">אבגיתץ קרעשטן נגדיכש בטרצתג חקבטנע יגלפזק שקוצית</p>
+  <p>Il Nome completo e i suoi sette gruppi diventano ingressi delle tavole 3×3 → 21×21. Ogni risultato conserva il percorso delle celle da cui è stato ricavato.</p>
+  <p class="small">La lettura numerica adottata è una regola del progetto. Puoi usarla senza data, Sole o Luna.</p>
+</header>
+<section class="panel" aria-label="Generazione">
+  <div class="controls">
+    <label class="field">Nome di partenza<select id="s42Seed"></select></label>
+    <label class="field">Le tue tavole<select id="s42Table"><option value="all">Tutte le 19 tavole</option><option value="classic">3×3 → 9×9</option><option value="higher">10×10 → 21×21</option></select></label>
+    <label class="field">Suffisso<select id="s42Suffix"><option value="אל">אל · El</option><option value="יה">יה · Yah</option><option value="both">אל e יה</option></select></label>
+    <label class="field">Gradi da generare<input id="s42Depth" type="number" min="1" max="9" value="1" required/></label>
+  </div>
+  <div class="toolbar"><button id="s42Generate" class="primary" type="button">Genera dalle tavole</button><span class="small">Per i gradi successivi si reinserisce il nome completo precedente.</span></div>
+  <p id="s42Error" class="error" role="alert" hidden></p>
+</section>
+<section class="panel" id="s42ResultsPanel">
+  <h2>Nomi ricavati</h2>
+  <div class="toolbar">
+    <input id="s42Search" class="search" type="search" placeholder="Cerca nome ebraico o gematria" aria-label="Cerca fra i risultati"/>
+    <label><input id="s42Unique" type="checkbox"/>Una riga per grafia</label>
+    <label><input id="s42HebrewOnly" type="checkbox" checked/>Solo nomi ebraici</label>
+  </div>
+  <div class="stats" aria-live="polite"><span><strong id="s42Paths">0</strong>derivazioni</span><span><strong id="s42Distinct">0</strong>grafie distinte</span><span><strong id="s42Visible">0</strong>righe visibili</span></div>
+  <p class="small">Premi un nome per vedere la tavola e il calcolo. La stessa grafia può provenire da tavole diverse.</p>
+  <div class="results-wrap"><table class="results"><thead><tr><th lang="he" dir="rtl">שם</th><th class="meta">Gematria</th><th class="meta">Ingresso</th><th class="meta">Tavola</th><th class="meta">Grado</th><th class="meta">Suffisso</th></tr></thead><tbody id="s42Rows"></tbody></table></div>
+  <p id="s42Empty" class="empty" hidden>Nessun risultato corrisponde alla ricerca.</p>
+  <div class="toolbar">
+    <button id="s42ExportJson" data-selection-export type="button">Esporta percorsi JSON</button>
+    <button id="s42ExportTxt" data-selection-export type="button">Elenco ebraico TXT</button>
+    <button id="s42ExportHtml" data-selection-export type="button">Elenco ebraico HTML</button>
+  </div>
+</section>
+<section class="panel" id="s42Details" hidden aria-label="Passaggi della derivazione">
+  <div class="toolbar" style="margin-top:0;justify-content:space-between"><h2>La lettura delle celle</h2><button id="s42CloseDetails" type="button">Chiudi</button></div>
+  <div id="s42RecordHeading"></div>
+  <div class="details-layout"><div><div class="matrix-scroll"><div id="s42MatrixStage" class="matrix-stage"></div></div><p class="small">Cerchio: prima lettera. Barra: ultima lettera. Il percorso mostra la lettura del nome in ingresso.</p></div><div id="s42Steps" class="steps"></div></div>
+</section>
+<details class="panel" id="methodNotes">
+  <summary>Regola di costruzione, fonti e corpus completo</summary>
+  <p id="s42Rule"></p><p id="s42Iteration"></p>
+  <p>Le forme finali sono ricondotte alle lettere ordinarie. Le coordinate seguono esattamente le matrici dell’atlante; i numerali letti dalle celle formano il nuovo nome con il suffisso scelto.</p>
+  <p>La variazione del disegno delle matrici cambia il percorso. Tavole con le stesse riduzioni possono produrre nomi uguali: ogni derivazione conserva il proprio ID. I gradi 1–9 sono iterazioni della regola del progetto.</p>
+  <p id="s42Scope"></p>
+  <p><a href="https://www.esotericarchives.com/agrippa/agripp2b.htm#chap22" target="_blank" rel="noopener noreferrer">Agrippa II.22: kamee</a> · <a href="https://www.esotericarchives.com/agrippa/agripp3c.htm#chap30" target="_blank" rel="noopener noreferrer">III.30: lettere e nove camere</a> · <a id="s42DivineSource" target="_blank" rel="noopener noreferrer">Fonte del Nome di 42 lettere</a></p>
+  <p>Il corpus completo usa otto ingressi, diciannove tavole, due suffissi e nove gradi: <strong id="s42CorpusCount"></strong>. La lettura delle celle qui adottata è distinta dalla sostituzione delle colonne planetarie di III.27.</p>
+  <button id="s42ExportAll" type="button">Esporta il corpus completo JSON</button>
+</details>
+<footer class="small"><a href="complete_angel_catalog.html">Catalogo completo per sfera</a> · <a href="angels_12_heavens.html">Atlante delle tavole</a> · <a href="index.html#divineNames42">Nome di 42 lettere</a> · Generatore autonomo, utilizzabile offline.</footer>
+</main>
+<script>
+/* Le tabelle sono inserite dal generatore a partire da hebrew_orthography.py. */
+function createOrthography(spec) {
+  'use strict';
+  const letters = spec.letters;
+  const reverse = {};
+  for (const [ch, info] of Object.entries(letters)) {
+    if (!(info.roman in reverse)) reverse[info.roman] = ch;
+  }
+  const nameKey = text => String(text).normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+  const knownNames = new Map();
+  const ambiguousNames = new Set();
+  function registerName(name, hebrew) {
+    const key = nameKey(name);
+    const value = String(hebrew).normalize('NFC').split('').filter(ch => letters[ch]).join('');
+    if (!key || !value || ambiguousNames.has(key)) return;
+    if (knownNames.has(key) && knownNames.get(key) !== value) {
+      knownNames.delete(key);
+      ambiguousNames.add(key);
+    } else knownNames.set(key, value);
+  }
+  for (const [name, hebrew] of Object.entries(spec.knownNames)) registerName(name, hebrew);
+
+  function gematria(text, extendedFinals = false) {
+    return Array.from(String(text)).reduce((sum, ch) => {
+      const info = letters[ch];
+      return sum + (info ? (extendedFinals ? (info.valFinal || info.val) : info.val) : 0);
+    }, 0);
+  }
+  function numberToHebrew(number) {
+    if (!Number.isSafeInteger(number) || number < 0) throw new RangeError('Serve un intero maggiore o uguale a zero.');
+    let n = number;
+    let result = 'ת'.repeat(Math.floor(n / 400));
+    n %= 400;
+    result += ['', 'ק', 'ר', 'ש'][Math.floor(n / 100)];
+    n %= 100;
+    if (n === 15) return result + 'טו';
+    if (n === 16) return result + 'טז';
+    return result + ['', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ'][Math.floor(n / 10)] + ['', 'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט'][n % 10];
+  }
+  function transliterateHebrew(text) {
+    return String(text).trim().split(/\s+/).map(word => Array.from(word).filter(ch => letters[ch]).map(ch => letters[ch].roman).join('·')).join(' / ');
+  }
+  const finalForms = {'כ':'ך', 'מ':'ם', 'נ':'ן', 'פ':'ף', 'צ':'ץ'};
+  function finalize(word) {
+    if (word.length < 2) return word;
+    return word.slice(0, -1) + (finalForms[word.slice(-1)] || word.slice(-1));
+  }
+  const digraphs = {'sch':'ש', 'sh':'ש', 'ch':'ח', 'kh':'כ', 'th':'ת', 'tz':'צ', 'ts':'צ', 'ph':'פ'};
+  const conventional = {'a':'א','b':'ב','c':'כ','d':'ד','e':'ה','f':'פ','g':'ג','h':'ה','i':'י','j':'י','k':'כ','l':'ל','m':'מ','n':'נ','o':'ו','p':'פ','q':'ק','r':'ר','s':'ס','t':'ת','u':'ו','v':'ו','w':'ו','x':'קס','y':'י','z':'ז'};
+  function convertName(input) {
+    const text = String(input).normalize('NFC').trim();
+    // Un testo ebraico esplicito ha priorità sulla sua eventuale etichetta latina.
+    if (Array.from(text).some(ch => letters[ch])) {
+      const hebrew = text.replace(/[\u0591-\u05BD\u05BF-\u05C7]/g, '').split(/\s+/).map(word => Array.from(word).filter(ch => letters[ch]).join('')).filter(Boolean).join(' ');
+      return {hebrew, kind:'hebrew'};
+    }
+    if (text.includes('·')) {
+      const words = text.toLowerCase().split(/\s*\/\s*/);
+      const parsed = words.map(word => word.split('·').map(token => reverse[token.trim()] || '').join(''));
+      if (words.some(word => word.split('·').some(token => !reverse[token.trim()]))) return {hebrew:'', kind:'invalid'};
+      return {hebrew:parsed.map(finalize).join(' '), kind:'transliteration'};
+    }
+    const key = nameKey(text);
+    if (knownNames.has(key)) return {hebrew:knownNames.get(key), kind:'known'};
+    if (ambiguousNames.has(key)) return {hebrew:'', kind:'ambiguous'};
+    let allKnown = true;
+    const words = text.split(/[\s/\-]+/).filter(Boolean).map(word => {
+      if (knownNames.has(nameKey(word))) return knownNames.get(nameKey(word));
+      allKnown = false;
+      let result = '';
+      const normalized = word.toLowerCase().normalize('NFC');
+      for (let i = 0; i < normalized.length;) {
+        const three = normalized.slice(i, i + 3);
+        const two = normalized.slice(i, i + 2);
+        if (digraphs[three]) { result += digraphs[three]; i += 3; }
+        else if (digraphs[two]) { result += digraphs[two]; i += 2; }
+        else {
+          const ch = normalized[i++];
+          const plain = ch.normalize('NFD').replace(/\p{M}/gu, '');
+          result += reverse[ch] || conventional[plain] || '';
+        }
+      }
+      return finalize(result);
+    });
+    return {hebrew:words.filter(Boolean).join(' '), kind:allKnown ? 'known' : 'conventional'};
+  }
+  function latinTokens(text) {
+    const tokens = [];
+    const input = String(text).normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+    for (let i = 0; i < input.length;) {
+      const explicit = input.slice(i).match(/^\[(hi|hv|i|v)\]/);
+      if (explicit) {
+        const token = explicit[1].toUpperCase();
+        tokens.push({token:'[' + token + ']', value:spec.latinSpecial[token]});
+        i += explicit[0].length;
+      } else {
+        const ch = input[i++];
+        if (spec.latinValues[ch]) tokens.push({token:ch.toUpperCase(), value:spec.latinValues[ch]});
+      }
+    }
+    return tokens;
+  }
+  function inlineText(value) {
+    return String(value).replace(/\\/g, '\\\\').replace(/'/g, '\\x27').replace(/"/g, '\\x22')
+      .replace(/&/g, '\\x26').replace(/</g, '\\x3c').replace(/>/g, '\\x3e')
+      .replace(/\r/g, '\\r').replace(/\n/g, '\\n').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+  }
+  return {letters, registerName, gematria, numberToHebrew, transliterateHebrew, convertName,
+          latinValues:spec.latinValues, latinTokens, inlineText,
+          latinGematria:text => latinTokens(text).reduce((sum, item) => sum + item.value, 0)};
+}
+
+/* Lettura delle celle delle diciannove tavole: regola numerica del progetto. */
+function createShem42TableEngine(orthography,spec) {
+  'use strict';
+  const finals={'ך':'כ','ם':'מ','ן':'נ','ף':'פ','ץ':'צ'};
+  const tables=new Map(spec.tables.map(table=>[table.order,{...table,
+    coords:new Map(table.matrix.flatMap((row,r)=>row.map((cell,c)=>[cell,{row:r,col:c}])))}]));
+  const normalize=seed=>[...String(seed)].map(ch=>finals[ch]||ch).filter(ch=>orthography.letters[ch]).join('');
+  function reduceToCell(value,maxCell) {
+    if(!Number.isSafeInteger(value)||value<1||!Number.isSafeInteger(maxCell)||maxCell<1) throw new Error('Valore della lettera o capacità della tavola non valido.');
+    while(value>maxCell) {
+      if(value%10===0) value=Math.floor(value/10);
+      else {const root=Math.floor(value/10); value=root>0&&root<=maxCell?root:((value-1)%maxCell)+1;}
+    }
+    return value;
+  }
+  function hierarchy(seed,order=9,suffix='אל',depth=1) {
+    const table=tables.get(order);
+    if(!Number.isInteger(order)||!table) throw new Error('Scegli una tavola da 3×3 a 21×21.');
+    if(!['אל','יה'].includes(suffix)||!Number.isInteger(depth)||depth<1||depth>9) throw new Error('Suffisso o numero di gradi non valido.');
+    let current=normalize(seed);
+    if(!current) throw new Error('Il nome di partenza deve contenere lettere ebraiche.');
+    const result=[];
+    for(let level=1;level<=depth;level++) {
+      const steps=[...current].map(letter=>{
+        const value=orthography.letters[letter].val,cell=reduceToCell(value,table.cells);
+        return {letter,value,cell,...table.coords.get(cell),numeral:orthography.numberToHebrew(cell)};
+      });
+      const root=steps.map(step=>step.numeral).join(''),hebrew=root+suffix;
+      result.push({level,seed:current,root_heb:root,hebrew,latin:orthography.transliterateHebrew(hebrew),
+        gematria:orthography.gematria(hebrew),root_value:steps.reduce((sum,step)=>sum+step.cell,0),steps});
+      current=hebrew;
+    }
+    return result;
+  }
+  function generate(seeds,orders,suffixes,depth=1) {
+    const result=[];
+    for(const seed of seeds) for(const order of orders) for(const suffix of suffixes) {
+      const suffixId=suffix==='אל'?'el':'yah';
+      for(const name of hierarchy(seed.hebrew,order,suffix,depth)) result.push({
+        id:`s42-${seed.id}-table-${order}-${suffixId}-${name.level}`,seed_id:seed.id,seed_label:seed.label,
+        source_hebrew:seed.hebrew,table_order:order,suffix,...name});
+    }
+    return result;
+  }
+  return {spec,normalize,reduceToCell,hierarchy,generate,getTable:order=>tables.get(order)};
+}
+
+const Orthography=createOrthography({"letters": {"א": {"name": "Aleph", "val": 1, "roman": "ʾ"}, "ב": {"name": "Beth", "val": 2, "roman": "b"}, "ג": {"name": "Gimel", "val": 3, "roman": "g"}, "ד": {"name": "Daleth", "val": 4, "roman": "d"}, "ה": {"name": "He", "val": 5, "roman": "h"}, "ו": {"name": "Vav", "val": 6, "roman": "v"}, "ז": {"name": "Zayin", "val": 7, "roman": "z"}, "ח": {"name": "Cheth", "val": 8, "roman": "ḥ"}, "ט": {"name": "Teth", "val": 9, "roman": "ṭ"}, "י": {"name": "Yod", "val": 10, "roman": "y"}, "כ": {"name": "Kaph", "val": 20, "roman": "k"}, "ך": {"name": "Kaph finale", "val": 20, "valFinal": 500, "roman": "k"}, "ל": {"name": "Lamed", "val": 30, "roman": "l"}, "מ": {"name": "Mem", "val": 40, "roman": "m"}, "ם": {"name": "Mem finale", "val": 40, "valFinal": 600, "roman": "m"}, "נ": {"name": "Nun", "val": 50, "roman": "n"}, "ן": {"name": "Nun finale", "val": 50, "valFinal": 700, "roman": "n"}, "ס": {"name": "Samekh", "val": 60, "roman": "s"}, "ע": {"name": "Ayin", "val": 70, "roman": "ʿ"}, "פ": {"name": "Pe", "val": 80, "roman": "p"}, "ף": {"name": "Pe finale", "val": 80, "valFinal": 800, "roman": "p"}, "צ": {"name": "Tsadi", "val": 90, "roman": "ṣ"}, "ץ": {"name": "Tsadi finale", "val": 90, "valFinal": 900, "roman": "ṣ"}, "ק": {"name": "Qoph", "val": 100, "roman": "q"}, "ר": {"name": "Resh", "val": 200, "roman": "r"}, "ש": {"name": "Shin", "val": 300, "roman": "š"}, "ת": {"name": "Tav", "val": 400, "roman": "t"}}, "latinValues": {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8, "i": 9, "k": 10, "l": 20, "m": 30, "n": 40, "o": 50, "p": 60, "q": 70, "r": 80, "s": 90, "t": 100, "u": 200, "x": 300, "y": 400, "z": 500, "j": 600, "v": 700, "w": 900}, "latinSpecial": {"I": 600, "V": 700, "HI": 800, "HV": 900}, "knownNames": {}});
+const SHEM42_DATA={"divine": {"title": "Nome divino di 42 lettere · Ana Bekoach", "source": "https://opensiddur.org/prayers/life-cycle/death/dying/ana-bkhoah-a-42-letter-name-piyyut-translated-by-reb-zalman/", "form": "Acrostico di Ana Bekoach: sette gruppi di sei lettere.", "orthographyNote": "Le forme finali ץ e ן sono conservate alla fine dei gruppi; per acrostico e sostituzioni valgono come צ e נ. Gematria ordinaria.", "projectionNote": "Il tracciamento di questo Nome sulle tavole è una convenzione del progetto. La successiva derivazione lunare usa separatamente la colonna della Luna di Agrippa III.27.", "full": {"id": "full", "label": "Nome completo di 42 lettere", "hebrew": "אבגיתץ קרעשטן נגדיכש בטרצתג חקבטנע יגלפזק שקוצית", "letters": 42, "latin": "ʾ·b·g·y·t·ṣ / q·r·ʿ·š·ṭ·n / n·g·d·y·k·š / b·ṭ·r·ṣ·t·g / ḥ·q·b·ṭ·n·ʿ / y·g·l·p·z·q / š·q·v·ṣ·y·t", "gematria": 3701}, "groups": [{"id": "group-1", "label": "Gruppo 1", "number": 1, "hebrew": "אבגיתץ", "letters": 6, "latin": "ʾ·b·g·y·t·ṣ", "gematria": 506, "prayer": "אנא בכח גדלת ימינך תתיר צרורה"}, {"id": "group-2", "label": "Gruppo 2", "number": 2, "hebrew": "קרעשטן", "letters": 6, "latin": "q·r·ʿ·š·ṭ·n", "gematria": 729, "prayer": "קבל רנת עמך שגבנו טהרנו נורא"}, {"id": "group-3", "label": "Gruppo 3", "number": 3, "hebrew": "נגדיכש", "letters": 6, "latin": "n·g·d·y·k·š", "gematria": 387, "prayer": "נא גבור דורשי יחודך כבבת שמרם"}, {"id": "group-4", "label": "Gruppo 4", "number": 4, "hebrew": "בטרצתג", "letters": 6, "latin": "b·ṭ·r·ṣ·t·g", "gematria": 704, "prayer": "ברכם טהרם רחמי צדקתך תמיד גמלם"}, {"id": "group-5", "label": "Gruppo 5", "number": 5, "hebrew": "חקבטנע", "letters": 6, "latin": "ḥ·q·b·ṭ·n·ʿ", "gematria": 239, "prayer": "חסין קדוש ברוב טובך נהל עדתך"}, {"id": "group-6", "label": "Gruppo 6", "number": 6, "hebrew": "יגלפזק", "letters": 6, "latin": "y·g·l·p·z·q", "gematria": 230, "prayer": "יחיד גאה לעמך פנה זוכרי קדשתך"}, {"id": "group-7", "label": "Gruppo 7", "number": 7, "hebrew": "שקוצית", "letters": 6, "latin": "š·q·v·ṣ·y·t", "gematria": 906, "prayer": "שועתנו קבל ושמע צעקתנו יודע תעלומות"}]}, "tables": {"tables": [{"order": 3, "cells": 9, "matrix": [[4, 9, 2], [3, 5, 7], [8, 1, 6]]}, {"order": 4, "cells": 16, "matrix": [[4, 14, 15, 1], [9, 7, 6, 12], [5, 11, 10, 8], [16, 2, 3, 13]]}, {"order": 5, "cells": 25, "matrix": [[11, 24, 7, 20, 3], [4, 12, 25, 8, 16], [17, 5, 13, 21, 9], [10, 18, 1, 14, 22], [23, 6, 19, 2, 15]]}, {"order": 6, "cells": 36, "matrix": [[6, 32, 3, 34, 35, 1], [7, 11, 27, 28, 8, 30], [19, 14, 16, 15, 23, 24], [18, 20, 22, 21, 17, 13], [25, 29, 10, 9, 26, 12], [36, 5, 33, 4, 2, 31]]}, {"order": 7, "cells": 49, "matrix": [[22, 47, 16, 41, 10, 35, 4], [5, 23, 48, 17, 42, 11, 29], [30, 6, 24, 49, 18, 36, 12], [13, 31, 7, 25, 43, 19, 37], [38, 14, 32, 1, 26, 44, 20], [21, 39, 8, 33, 2, 27, 45], [46, 15, 40, 9, 34, 3, 28]]}, {"order": 8, "cells": 64, "matrix": [[8, 58, 59, 5, 4, 62, 63, 1], [49, 15, 14, 52, 53, 11, 10, 56], [41, 23, 22, 44, 45, 19, 18, 48], [32, 34, 35, 29, 28, 38, 39, 25], [40, 26, 27, 37, 36, 30, 31, 33], [17, 47, 46, 20, 21, 43, 42, 24], [9, 55, 54, 12, 13, 51, 50, 16], [64, 2, 3, 61, 60, 6, 7, 57]]}, {"order": 9, "cells": 81, "matrix": [[37, 78, 29, 70, 21, 62, 13, 54, 5], [6, 38, 79, 30, 71, 22, 63, 14, 46], [47, 7, 39, 80, 31, 72, 23, 55, 15], [16, 48, 8, 40, 81, 32, 64, 24, 56], [57, 17, 49, 9, 41, 73, 33, 65, 25], [26, 58, 18, 50, 1, 42, 74, 34, 66], [67, 27, 59, 10, 51, 2, 43, 75, 35], [36, 68, 19, 60, 11, 52, 3, 44, 76], [77, 28, 69, 20, 61, 12, 53, 4, 45]]}, {"order": 10, "cells": 100, "matrix": [[92, 99, 1, 8, 15, 67, 74, 51, 58, 40], [98, 80, 7, 14, 16, 73, 55, 57, 64, 41], [4, 81, 88, 20, 22, 54, 56, 63, 70, 47], [85, 87, 19, 21, 3, 60, 62, 69, 71, 28], [86, 93, 25, 2, 9, 61, 68, 75, 52, 34], [17, 24, 76, 83, 90, 42, 49, 26, 33, 65], [23, 5, 82, 89, 91, 48, 30, 32, 39, 66], [79, 6, 13, 95, 97, 29, 31, 38, 45, 72], [10, 12, 94, 96, 78, 35, 37, 44, 46, 53], [11, 18, 100, 77, 84, 36, 43, 50, 27, 59]]}, {"order": 11, "cells": 121, "matrix": [[68, 81, 94, 107, 120, 1, 14, 27, 40, 53, 66], [80, 93, 106, 119, 11, 13, 26, 39, 52, 65, 67], [92, 105, 118, 10, 12, 25, 38, 51, 64, 77, 79], [104, 117, 9, 22, 24, 37, 50, 63, 76, 78, 91], [116, 8, 21, 23, 36, 49, 62, 75, 88, 90, 103], [7, 20, 33, 35, 48, 61, 74, 87, 89, 102, 115], [19, 32, 34, 47, 60, 73, 86, 99, 101, 114, 6], [31, 44, 46, 59, 72, 85, 98, 100, 113, 5, 18], [43, 45, 58, 71, 84, 97, 110, 112, 4, 17, 30], [55, 57, 70, 83, 96, 109, 111, 3, 16, 29, 42], [56, 69, 82, 95, 108, 121, 2, 15, 28, 41, 54]]}, {"order": 12, "cells": 144, "matrix": [[144, 2, 3, 141, 140, 6, 7, 137, 136, 10, 11, 133], [13, 131, 130, 16, 17, 127, 126, 20, 21, 123, 122, 24], [25, 119, 118, 28, 29, 115, 114, 32, 33, 111, 110, 36], [108, 38, 39, 105, 104, 42, 43, 101, 100, 46, 47, 97], [96, 50, 51, 93, 92, 54, 55, 89, 88, 58, 59, 85], [61, 83, 82, 64, 65, 79, 78, 68, 69, 75, 74, 72], [73, 71, 70, 76, 77, 67, 66, 80, 81, 63, 62, 84], [60, 86, 87, 57, 56, 90, 91, 53, 52, 94, 95, 49], [48, 98, 99, 45, 44, 102, 103, 41, 40, 106, 107, 37], [109, 35, 34, 112, 113, 31, 30, 116, 117, 27, 26, 120], [121, 23, 22, 124, 125, 19, 18, 128, 129, 15, 14, 132], [12, 134, 135, 9, 8, 138, 139, 5, 4, 142, 143, 1]]}, {"order": 13, "cells": 169, "matrix": [[93, 108, 123, 138, 153, 168, 1, 16, 31, 46, 61, 76, 91], [107, 122, 137, 152, 167, 13, 15, 30, 45, 60, 75, 90, 92], [121, 136, 151, 166, 12, 14, 29, 44, 59, 74, 89, 104, 106], [135, 150, 165, 11, 26, 28, 43, 58, 73, 88, 103, 105, 120], [149, 164, 10, 25, 27, 42, 57, 72, 87, 102, 117, 119, 134], [163, 9, 24, 39, 41, 56, 71, 86, 101, 116, 118, 133, 148], [8, 23, 38, 40, 55, 70, 85, 100, 115, 130, 132, 147, 162], [22, 37, 52, 54, 69, 84, 99, 114, 129, 131, 146, 161, 7], [36, 51, 53, 68, 83, 98, 113, 128, 143, 145, 160, 6, 21], [50, 65, 67, 82, 97, 112, 127, 142, 144, 159, 5, 20, 35], [64, 66, 81, 96, 111, 126, 141, 156, 158, 4, 19, 34, 49], [78, 80, 95, 110, 125, 140, 155, 157, 3, 18, 33, 48, 63], [79, 94, 109, 124, 139, 154, 169, 2, 17, 32, 47, 62, 77]]}, {"order": 14, "cells": 196, "matrix": [[177, 186, 195, 1, 10, 19, 28, 128, 137, 146, 99, 108, 68, 77], [185, 194, 154, 9, 18, 27, 29, 136, 145, 105, 107, 116, 76, 78], [193, 153, 155, 17, 26, 35, 37, 144, 104, 106, 115, 124, 84, 86], [5, 161, 163, 172, 34, 36, 45, 103, 112, 114, 123, 132, 85, 94], [160, 162, 171, 33, 42, 44, 4, 111, 113, 122, 131, 140, 93, 53], [168, 170, 179, 41, 43, 3, 12, 119, 121, 130, 139, 141, 52, 61], [169, 178, 187, 49, 2, 11, 20, 120, 129, 138, 147, 100, 60, 69], [30, 39, 48, 148, 157, 166, 175, 79, 88, 97, 50, 59, 117, 126], [38, 47, 7, 156, 165, 174, 176, 87, 96, 56, 58, 67, 125, 127], [46, 6, 8, 164, 173, 182, 184, 95, 55, 57, 66, 75, 133, 135], [152, 14, 16, 25, 181, 183, 192, 54, 63, 65, 74, 83, 134, 143], [13, 15, 24, 180, 189, 191, 151, 62, 64, 73, 82, 91, 142, 102], [21, 23, 32, 188, 190, 150, 159, 70, 72, 81, 90, 92, 101, 110], [22, 31, 40, 196, 149, 158, 167, 71, 80, 89, 98, 51, 109, 118]]}, {"order": 15, "cells": 225, "matrix": [[122, 139, 156, 173, 190, 207, 224, 1, 18, 35, 52, 69, 86, 103, 120], [138, 155, 172, 189, 206, 223, 15, 17, 34, 51, 68, 85, 102, 119, 121], [154, 171, 188, 205, 222, 14, 16, 33, 50, 67, 84, 101, 118, 135, 137], [170, 187, 204, 221, 13, 30, 32, 49, 66, 83, 100, 117, 134, 136, 153], [186, 203, 220, 12, 29, 31, 48, 65, 82, 99, 116, 133, 150, 152, 169], [202, 219, 11, 28, 45, 47, 64, 81, 98, 115, 132, 149, 151, 168, 185], [218, 10, 27, 44, 46, 63, 80, 97, 114, 131, 148, 165, 167, 184, 201], [9, 26, 43, 60, 62, 79, 96, 113, 130, 147, 164, 166, 183, 200, 217], [25, 42, 59, 61, 78, 95, 112, 129, 146, 163, 180, 182, 199, 216, 8], [41, 58, 75, 77, 94, 111, 128, 145, 162, 179, 181, 198, 215, 7, 24], [57, 74, 76, 93, 110, 127, 144, 161, 178, 195, 197, 214, 6, 23, 40], [73, 90, 92, 109, 126, 143, 160, 177, 194, 196, 213, 5, 22, 39, 56], [89, 91, 108, 125, 142, 159, 176, 193, 210, 212, 4, 21, 38, 55, 72], [105, 107, 124, 141, 158, 175, 192, 209, 211, 3, 20, 37, 54, 71, 88], [106, 123, 140, 157, 174, 191, 208, 225, 2, 19, 36, 53, 70, 87, 104]]}, {"order": 16, "cells": 256, "matrix": [[256, 2, 3, 253, 252, 6, 7, 249, 248, 10, 11, 245, 244, 14, 15, 241], [17, 239, 238, 20, 21, 235, 234, 24, 25, 231, 230, 28, 29, 227, 226, 32], [33, 223, 222, 36, 37, 219, 218, 40, 41, 215, 214, 44, 45, 211, 210, 48], [208, 50, 51, 205, 204, 54, 55, 201, 200, 58, 59, 197, 196, 62, 63, 193], [192, 66, 67, 189, 188, 70, 71, 185, 184, 74, 75, 181, 180, 78, 79, 177], [81, 175, 174, 84, 85, 171, 170, 88, 89, 167, 166, 92, 93, 163, 162, 96], [97, 159, 158, 100, 101, 155, 154, 104, 105, 151, 150, 108, 109, 147, 146, 112], [144, 114, 115, 141, 140, 118, 119, 137, 136, 122, 123, 133, 132, 126, 127, 129], [128, 130, 131, 125, 124, 134, 135, 121, 120, 138, 139, 117, 116, 142, 143, 113], [145, 111, 110, 148, 149, 107, 106, 152, 153, 103, 102, 156, 157, 99, 98, 160], [161, 95, 94, 164, 165, 91, 90, 168, 169, 87, 86, 172, 173, 83, 82, 176], [80, 178, 179, 77, 76, 182, 183, 73, 72, 186, 187, 69, 68, 190, 191, 65], [64, 194, 195, 61, 60, 198, 199, 57, 56, 202, 203, 53, 52, 206, 207, 49], [209, 47, 46, 212, 213, 43, 42, 216, 217, 39, 38, 220, 221, 35, 34, 224], [225, 31, 30, 228, 229, 27, 26, 232, 233, 23, 22, 236, 237, 19, 18, 240], [16, 242, 243, 13, 12, 246, 247, 9, 8, 250, 251, 5, 4, 254, 255, 1]]}, {"order": 17, "cells": 289, "matrix": [[155, 174, 193, 212, 231, 250, 269, 288, 1, 20, 39, 58, 77, 96, 115, 134, 153], [173, 192, 211, 230, 249, 268, 287, 17, 19, 38, 57, 76, 95, 114, 133, 152, 154], [191, 210, 229, 248, 267, 286, 16, 18, 37, 56, 75, 94, 113, 132, 151, 170, 172], [209, 228, 247, 266, 285, 15, 34, 36, 55, 74, 93, 112, 131, 150, 169, 171, 190], [227, 246, 265, 284, 14, 33, 35, 54, 73, 92, 111, 130, 149, 168, 187, 189, 208], [245, 264, 283, 13, 32, 51, 53, 72, 91, 110, 129, 148, 167, 186, 188, 207, 226], [263, 282, 12, 31, 50, 52, 71, 90, 109, 128, 147, 166, 185, 204, 206, 225, 244], [281, 11, 30, 49, 68, 70, 89, 108, 127, 146, 165, 184, 203, 205, 224, 243, 262], [10, 29, 48, 67, 69, 88, 107, 126, 145, 164, 183, 202, 221, 223, 242, 261, 280], [28, 47, 66, 85, 87, 106, 125, 144, 163, 182, 201, 220, 222, 241, 260, 279, 9], [46, 65, 84, 86, 105, 124, 143, 162, 181, 200, 219, 238, 240, 259, 278, 8, 27], [64, 83, 102, 104, 123, 142, 161, 180, 199, 218, 237, 239, 258, 277, 7, 26, 45], [82, 101, 103, 122, 141, 160, 179, 198, 217, 236, 255, 257, 276, 6, 25, 44, 63], [100, 119, 121, 140, 159, 178, 197, 216, 235, 254, 256, 275, 5, 24, 43, 62, 81], [118, 120, 139, 158, 177, 196, 215, 234, 253, 272, 274, 4, 23, 42, 61, 80, 99], [136, 138, 157, 176, 195, 214, 233, 252, 271, 273, 3, 22, 41, 60, 79, 98, 117], [137, 156, 175, 194, 213, 232, 251, 270, 289, 2, 21, 40, 59, 78, 97, 116, 135]]}, {"order": 18, "cells": 324, "matrix": [[290, 301, 312, 323, 1, 12, 23, 34, 45, 209, 220, 231, 242, 163, 174, 104, 115, 126], [300, 311, 322, 252, 11, 22, 33, 44, 46, 219, 230, 241, 171, 173, 184, 114, 125, 127], [310, 321, 251, 253, 21, 32, 43, 54, 56, 229, 240, 170, 172, 183, 194, 124, 135, 137], [320, 250, 261, 263, 31, 42, 53, 55, 66, 239, 169, 180, 182, 193, 204, 134, 136, 147], [6, 260, 262, 273, 284, 52, 63, 65, 76, 168, 179, 181, 192, 203, 214, 144, 146, 157], [259, 270, 272, 283, 51, 62, 64, 75, 5, 178, 189, 191, 202, 213, 224, 145, 156, 86], [269, 271, 282, 293, 61, 72, 74, 4, 15, 188, 190, 201, 212, 223, 234, 155, 85, 96], [279, 281, 292, 303, 71, 73, 3, 14, 25, 198, 200, 211, 222, 233, 235, 84, 95, 106], [280, 291, 302, 313, 81, 2, 13, 24, 35, 199, 210, 221, 232, 243, 164, 94, 105, 116], [47, 58, 69, 80, 244, 255, 266, 277, 288, 128, 139, 150, 161, 82, 93, 185, 196, 207], [57, 68, 79, 9, 254, 265, 276, 287, 289, 138, 149, 160, 90, 92, 103, 195, 206, 208], [67, 78, 8, 10, 264, 275, 286, 297, 299, 148, 159, 89, 91, 102, 113, 205, 216, 218], [77, 7, 18, 20, 274, 285, 296, 298, 309, 158, 88, 99, 101, 112, 123, 215, 217, 228], [249, 17, 19, 30, 41, 295, 306, 308, 319, 87, 98, 100, 111, 122, 133, 225, 227, 238], [16, 27, 29, 40, 294, 305, 307, 318, 248, 97, 108, 110, 121, 132, 143, 226, 237, 167], [26, 28, 39, 50, 304, 315, 317, 247, 258, 107, 109, 120, 131, 142, 153, 236, 166, 177], [36, 38, 49, 60, 314, 316, 246, 257, 268, 117, 119, 130, 141, 152, 154, 165, 176, 187], [37, 48, 59, 70, 324, 245, 256, 267, 278, 118, 129, 140, 151, 162, 83, 175, 186, 197]]}, {"order": 19, "cells": 361, "matrix": [[192, 213, 234, 255, 276, 297, 318, 339, 360, 1, 22, 43, 64, 85, 106, 127, 148, 169, 190], [212, 233, 254, 275, 296, 317, 338, 359, 19, 21, 42, 63, 84, 105, 126, 147, 168, 189, 191], [232, 253, 274, 295, 316, 337, 358, 18, 20, 41, 62, 83, 104, 125, 146, 167, 188, 209, 211], [252, 273, 294, 315, 336, 357, 17, 38, 40, 61, 82, 103, 124, 145, 166, 187, 208, 210, 231], [272, 293, 314, 335, 356, 16, 37, 39, 60, 81, 102, 123, 144, 165, 186, 207, 228, 230, 251], [292, 313, 334, 355, 15, 36, 57, 59, 80, 101, 122, 143, 164, 185, 206, 227, 229, 250, 271], [312, 333, 354, 14, 35, 56, 58, 79, 100, 121, 142, 163, 184, 205, 226, 247, 249, 270, 291], [332, 353, 13, 34, 55, 76, 78, 99, 120, 141, 162, 183, 204, 225, 246, 248, 269, 290, 311], [352, 12, 33, 54, 75, 77, 98, 119, 140, 161, 182, 203, 224, 245, 266, 268, 289, 310, 331], [11, 32, 53, 74, 95, 97, 118, 139, 160, 181, 202, 223, 244, 265, 267, 288, 309, 330, 351], [31, 52, 73, 94, 96, 117, 138, 159, 180, 201, 222, 243, 264, 285, 287, 308, 329, 350, 10], [51, 72, 93, 114, 116, 137, 158, 179, 200, 221, 242, 263, 284, 286, 307, 328, 349, 9, 30], [71, 92, 113, 115, 136, 157, 178, 199, 220, 241, 262, 283, 304, 306, 327, 348, 8, 29, 50], [91, 112, 133, 135, 156, 177, 198, 219, 240, 261, 282, 303, 305, 326, 347, 7, 28, 49, 70], [111, 132, 134, 155, 176, 197, 218, 239, 260, 281, 302, 323, 325, 346, 6, 27, 48, 69, 90], [131, 152, 154, 175, 196, 217, 238, 259, 280, 301, 322, 324, 345, 5, 26, 47, 68, 89, 110], [151, 153, 174, 195, 216, 237, 258, 279, 300, 321, 342, 344, 4, 25, 46, 67, 88, 109, 130], [171, 173, 194, 215, 236, 257, 278, 299, 320, 341, 343, 3, 24, 45, 66, 87, 108, 129, 150], [172, 193, 214, 235, 256, 277, 298, 319, 340, 361, 2, 23, 44, 65, 86, 107, 128, 149, 170]]}, {"order": 20, "cells": 400, "matrix": [[400, 2, 3, 397, 396, 6, 7, 393, 392, 10, 11, 389, 388, 14, 15, 385, 384, 18, 19, 381], [21, 379, 378, 24, 25, 375, 374, 28, 29, 371, 370, 32, 33, 367, 366, 36, 37, 363, 362, 40], [41, 359, 358, 44, 45, 355, 354, 48, 49, 351, 350, 52, 53, 347, 346, 56, 57, 343, 342, 60], [340, 62, 63, 337, 336, 66, 67, 333, 332, 70, 71, 329, 328, 74, 75, 325, 324, 78, 79, 321], [320, 82, 83, 317, 316, 86, 87, 313, 312, 90, 91, 309, 308, 94, 95, 305, 304, 98, 99, 301], [101, 299, 298, 104, 105, 295, 294, 108, 109, 291, 290, 112, 113, 287, 286, 116, 117, 283, 282, 120], [121, 279, 278, 124, 125, 275, 274, 128, 129, 271, 270, 132, 133, 267, 266, 136, 137, 263, 262, 140], [260, 142, 143, 257, 256, 146, 147, 253, 252, 150, 151, 249, 248, 154, 155, 245, 244, 158, 159, 241], [240, 162, 163, 237, 236, 166, 167, 233, 232, 170, 171, 229, 228, 174, 175, 225, 224, 178, 179, 221], [181, 219, 218, 184, 185, 215, 214, 188, 189, 211, 210, 192, 193, 207, 206, 196, 197, 203, 202, 200], [201, 199, 198, 204, 205, 195, 194, 208, 209, 191, 190, 212, 213, 187, 186, 216, 217, 183, 182, 220], [180, 222, 223, 177, 176, 226, 227, 173, 172, 230, 231, 169, 168, 234, 235, 165, 164, 238, 239, 161], [160, 242, 243, 157, 156, 246, 247, 153, 152, 250, 251, 149, 148, 254, 255, 145, 144, 258, 259, 141], [261, 139, 138, 264, 265, 135, 134, 268, 269, 131, 130, 272, 273, 127, 126, 276, 277, 123, 122, 280], [281, 119, 118, 284, 285, 115, 114, 288, 289, 111, 110, 292, 293, 107, 106, 296, 297, 103, 102, 300], [100, 302, 303, 97, 96, 306, 307, 93, 92, 310, 311, 89, 88, 314, 315, 85, 84, 318, 319, 81], [80, 322, 323, 77, 76, 326, 327, 73, 72, 330, 331, 69, 68, 334, 335, 65, 64, 338, 339, 61], [341, 59, 58, 344, 345, 55, 54, 348, 349, 51, 50, 352, 353, 47, 46, 356, 357, 43, 42, 360], [361, 39, 38, 364, 365, 35, 34, 368, 369, 31, 30, 372, 373, 27, 26, 376, 377, 23, 22, 380], [20, 382, 383, 17, 16, 386, 387, 13, 12, 390, 391, 9, 8, 394, 395, 5, 4, 398, 399, 1]]}, {"order": 21, "cells": 441, "matrix": [[233, 256, 279, 302, 325, 348, 371, 394, 417, 440, 1, 24, 47, 70, 93, 116, 139, 162, 185, 208, 231], [255, 278, 301, 324, 347, 370, 393, 416, 439, 21, 23, 46, 69, 92, 115, 138, 161, 184, 207, 230, 232], [277, 300, 323, 346, 369, 392, 415, 438, 20, 22, 45, 68, 91, 114, 137, 160, 183, 206, 229, 252, 254], [299, 322, 345, 368, 391, 414, 437, 19, 42, 44, 67, 90, 113, 136, 159, 182, 205, 228, 251, 253, 276], [321, 344, 367, 390, 413, 436, 18, 41, 43, 66, 89, 112, 135, 158, 181, 204, 227, 250, 273, 275, 298], [343, 366, 389, 412, 435, 17, 40, 63, 65, 88, 111, 134, 157, 180, 203, 226, 249, 272, 274, 297, 320], [365, 388, 411, 434, 16, 39, 62, 64, 87, 110, 133, 156, 179, 202, 225, 248, 271, 294, 296, 319, 342], [387, 410, 433, 15, 38, 61, 84, 86, 109, 132, 155, 178, 201, 224, 247, 270, 293, 295, 318, 341, 364], [409, 432, 14, 37, 60, 83, 85, 108, 131, 154, 177, 200, 223, 246, 269, 292, 315, 317, 340, 363, 386], [431, 13, 36, 59, 82, 105, 107, 130, 153, 176, 199, 222, 245, 268, 291, 314, 316, 339, 362, 385, 408], [12, 35, 58, 81, 104, 106, 129, 152, 175, 198, 221, 244, 267, 290, 313, 336, 338, 361, 384, 407, 430], [34, 57, 80, 103, 126, 128, 151, 174, 197, 220, 243, 266, 289, 312, 335, 337, 360, 383, 406, 429, 11], [56, 79, 102, 125, 127, 150, 173, 196, 219, 242, 265, 288, 311, 334, 357, 359, 382, 405, 428, 10, 33], [78, 101, 124, 147, 149, 172, 195, 218, 241, 264, 287, 310, 333, 356, 358, 381, 404, 427, 9, 32, 55], [100, 123, 146, 148, 171, 194, 217, 240, 263, 286, 309, 332, 355, 378, 380, 403, 426, 8, 31, 54, 77], [122, 145, 168, 170, 193, 216, 239, 262, 285, 308, 331, 354, 377, 379, 402, 425, 7, 30, 53, 76, 99], [144, 167, 169, 192, 215, 238, 261, 284, 307, 330, 353, 376, 399, 401, 424, 6, 29, 52, 75, 98, 121], [166, 189, 191, 214, 237, 260, 283, 306, 329, 352, 375, 398, 400, 423, 5, 28, 51, 74, 97, 120, 143], [188, 190, 213, 236, 259, 282, 305, 328, 351, 374, 397, 420, 422, 4, 27, 50, 73, 96, 119, 142, 165], [210, 212, 235, 258, 281, 304, 327, 350, 373, 396, 419, 421, 3, 26, 49, 72, 95, 118, 141, 164, 187], [211, 234, 257, 280, 303, 326, 349, 372, 395, 418, 441, 2, 25, 48, 71, 94, 117, 140, 163, 186, 209]]}], "rule": "Lettera ebraica → valore ordinario → cella della tavola, riducendo per decine finché il valore rientra in N² → numerale ebraico della cella. Si concatenano i numerali in ordine e si aggiunge אל oppure יה.", "iterationRule": "Ogni grado successivo ripete la stessa lettura sul nome completo precedente, suffisso incluso.", "methodStatus": "Lettura numerica delle celle: convenzione del progetto applicata alle sue diciannove tavole.", "sources": ["https://www.esotericarchives.com/agrippa/agripp2b.htm#chap22", "https://www.esotericarchives.com/agrippa/agripp3c.htm#chap30"], "scopeNote": "Le sette kamee 3×3–9×9 sono classiche; le tavole 10×10–21×21 sono estensioni del progetto."}, "catalogMeta": {"schemaVersion": 1, "title": "Nomi derivati dal Nome di 42 lettere sulle diciannove tavole", "rule": "Lettera ebraica → valore ordinario → cella della tavola, riducendo per decine finché il valore rientra in N² → numerale ebraico della cella. Si concatenano i numerali in ordine e si aggiunge אל oppure יה.", "iterationRule": "Ogni grado successivo ripete la stessa lettura sul nome completo precedente, suffisso incluso.", "methodStatus": "Lettura numerica delle celle: convenzione del progetto applicata alle sue diciannove tavole.", "scopeNote": "Le sette kamee 3×3–9×9 sono classiche; le tavole 10×10–21×21 sono estensioni del progetto.", "sources": ["https://www.esotericarchives.com/agrippa/agripp2b.htm#chap22", "https://www.esotericarchives.com/agrippa/agripp3c.htm#chap30"], "divineSource": "https://opensiddur.org/prayers/life-cycle/death/dying/ana-bkhoah-a-42-letter-name-piyyut-translated-by-reb-zalman/", "scope": "Nome completo e sette gruppi, tavole da 3×3 a 21×21, due suffissi, fino a nove gradi.", "counts": {"derivations": 2736, "distinctSpellings": 1004}}};
+const Table42Engine=createShem42TableEngine(Orthography,SHEM42_DATA.tables);
+/* Interfaccia del generatore: nessuna effemeride o colonna planetaria. */
+const Shem42Generator=(()=>{
+  'use strict';
+  const $=id=>document.getElementById(id),escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  const allSeeds=[SHEM42_DATA.divine.full,...SHEM42_DATA.divine.groups],allOrders=SHEM42_DATA.tables.tables.map(table=>table.order);
+  let records=[],visible=[],matched=[],selected=null;
+  function config() {
+    const seedChoice=$('s42Seed').value,tableChoice=$('s42Table').value,suffixChoice=$('s42Suffix').value;
+    const seeds=seedChoice==='groups'?SHEM42_DATA.divine.groups:seedChoice==='all'?allSeeds:allSeeds.filter(seed=>seed.id===seedChoice);
+    const orders=tableChoice==='all'?allOrders:tableChoice==='classic'?allOrders.filter(n=>n<=9):tableChoice==='higher'?allOrders.filter(n=>n>=10):[Number(tableChoice)];
+    if(!seeds.length) throw new Error('Scegli un nome di partenza.');
+    return {seeds,orders,suffixes:suffixChoice==='both'?['אל','יה']:[suffixChoice],depth:Number($('s42Depth').value)};
+  }
+  function render() {
+    const query=$('s42Search').value.trim();
+    const normalized=Table42Engine.normalize(query);
+    matched=records.filter(item=>!query||(normalized&&item.hebrew.includes(normalized))||String(item.gematria)===query);
+    const byName=new Map();
+    for(const item of matched) {if(!byName.has(item.hebrew)) byName.set(item.hebrew,[]); byName.get(item.hebrew).push(item);}
+    visible=$('s42Unique').checked?[...byName.values()].map(items=>items[0]):matched;
+    $('s42ResultsPanel').classList.toggle('pure',$('s42HebrewOnly').checked);
+    $('s42Paths').textContent=matched.length.toLocaleString('it-IT');
+    $('s42Distinct').textContent=byName.size.toLocaleString('it-IT');
+    $('s42Visible').textContent=visible.length.toLocaleString('it-IT');
+    $('s42Rows').innerHTML=visible.map(item=>`<tr data-record-id="${item.id}"><td><button type="button" class="name hebrew" lang="he" dir="rtl" data-open-record="${item.id}" aria-label="Mostra le celle di ${item.hebrew}">${item.hebrew}</button><span class="meta">${escape(item.latin)}</span></td><td class="meta">${item.gematria}</td><td class="meta">${escape(item.seed_label)}</td><td class="meta">${item.table_order}×${item.table_order}</td><td class="meta">${item.level}</td><td class="meta hebrew">${item.suffix}</td></tr>`).join('');
+    $('s42Empty').hidden=visible.length>0;
+    document.querySelectorAll('[data-selection-export]').forEach(button=>{button.disabled=!visible.length;});
+    if(selected&&!visible.some(item=>item.id===selected.id)) {$('s42Details').hidden=true; selected=null;}
+  }
+  function generate() {
+    try {
+      const options=config();
+      records=Table42Engine.generate(options.seeds,options.orders,options.suffixes,options.depth);
+      $('s42Error').hidden=true;
+    } catch(error) {
+      records=[]; $('s42Error').textContent=error.message||String(error); $('s42Error').hidden=false;
+    }
+    selected=null; $('s42Details').hidden=true; render();
+  }
+  function showRecord(id) {
+    selected=records.find(item=>item.id===id);
+    if(!selected) return;
+    const item=selected,n=item.table_order,table=Table42Engine.getTable(n),active=new Set(item.steps.map(step=>step.cell));
+    $('s42RecordHeading').innerHTML=`<p class="detail-name hebrew" dir="rtl">${item.hebrew}</p><p class="small">${escape(item.seed_label)} · tavola ${n}×${n} · grado ${item.level} · gematria ${item.gematria}</p><p>Ingresso: <bdi class="hebrew">${item.seed}</bdi> → radice letta: <bdi class="hebrew">${item.root_heb}</bdi> + <bdi class="hebrew">${item.suffix}</bdi></p>`;
+    const points=item.steps.map(step=>({x:(step.col+.5)*100/n,y:(step.row+.5)*100/n}));
+    const first=points[0],last=points[points.length-1];
+    $('s42MatrixStage').innerHTML=`<div class="matrix" style="grid-template-columns:repeat(${n},minmax(0,1fr));--cell-font:${n>16?10:n>10?12:16}px">${table.matrix.flat().map(cell=>`<span class="cell hebrew ${active.has(cell)?'active':''}" data-cell="${cell}" title="${cell}">${Orthography.numberToHebrew(cell)}</span>`).join('')}</div><svg class="path" viewBox="0 0 100 100" role="img" aria-label="Percorso di lettura delle celle"><polyline points="${points.map(p=>`${p.x},${p.y}`).join(' ')}" stroke="#7dd7ce" stroke-width=".7" stroke-linejoin="round" fill="none"/><circle cx="${first.x}" cy="${first.y}" r="1.2" fill="none" stroke="#e2c881" stroke-width=".7"/><path d="M${last.x-1.2} ${last.y-1.2} L${last.x+1.2} ${last.y+1.2}" stroke="#e2c881" stroke-width=".7"/></svg>`;
+    $('s42Steps').innerHTML=item.steps.map((step,i)=>`<p>${i+1}. <bdi class="hebrew">${step.letter}</bdi> = ${step.value} → cella ${step.cell} (riga ${step.row+1}, colonna ${step.col+1}) → <bdi class="hebrew">${step.numeral}</bdi></p>`).join('')+`<p>Somma delle celle: ${item.root_value} + suffisso ${Orthography.gematria(item.suffix)} = ${item.gematria}.</p>`;
+    $('s42Details').hidden=false; $('s42Details').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function selectionPayload() {
+    return {...SHEM42_DATA.catalogMeta,counts:{derivations:matched.length,distinctSpellings:new Set(matched.map(item=>item.hebrew)).size},
+      selection:{search:$('s42Search').value,oneRowPerSpelling:$('s42Unique').checked,depth:Number($('s42Depth').value)},
+      visibleRecordIds:visible.map(item=>item.id),records:matched};
+  }
+  function completePayload() {
+    return {...SHEM42_DATA.catalogMeta,seeds:allSeeds,records:Table42Engine.generate(allSeeds,allOrders,['אל','יה'],9)};
+  }
+  function plainHtml() {
+    return '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>שמות</title><style>body{max-width:960px;margin:40px auto;padding:0 20px;font:26px/1.8 "Times New Roman",serif;color:#151515;background:#fff}li{padding:12px 0;overflow-wrap:anywhere;break-inside:avoid}ol{list-style:none;padding:0}</style></head><body><ol>'+visible.map(item=>'<li>'+escape(item.hebrew)+'</li>').join('')+'</ol></'+'body></html>';
+  }
+  function download(name,type,text) {
+    const url=URL.createObjectURL(new Blob([text],{type}));
+    const link=document.createElement('a'); link.href=url; link.download=name; link.click(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+  $('s42Seed').innerHTML='<option value="groups">I sette gruppi di sei lettere</option><option value="full">Il Nome completo di 42 lettere</option><option value="all">Nome completo e sette gruppi</option>'+SHEM42_DATA.divine.groups.map(seed=>`<option value="${seed.id}">${seed.label} · ${seed.hebrew}</option>`).join('');
+  $('s42Table').insertAdjacentHTML('beforeend',allOrders.map(n=>`<option value="${n}">${n}×${n}</option>`).join(''));
+  for(const id of ['s42Seed','s42Table','s42Suffix','s42Depth']) $(id).addEventListener('change',generate);
+  $('s42Generate').addEventListener('click',generate);
+  $('s42Search').addEventListener('input',render);
+  for(const id of ['s42Unique','s42HebrewOnly']) $(id).addEventListener('change',render);
+  $('s42Rows').addEventListener('click',event=>{const button=event.target.closest('[data-open-record]'); if(button) showRecord(button.dataset.openRecord);});
+  $('s42CloseDetails').addEventListener('click',()=>{$('s42Details').hidden=true;selected=null;});
+  $('s42ExportJson').addEventListener('click',()=>download('nomi_42_tavole_selezione.json','application/json',JSON.stringify(selectionPayload(),null,2)));
+  $('s42ExportTxt').addEventListener('click',()=>download('nomi_42_ebraico.txt','text/plain;charset=utf-8',visible.map(item=>item.hebrew).join('\n')+'\n'));
+  $('s42ExportHtml').addEventListener('click',()=>download('nomi_42_ebraico.html','text/html;charset=utf-8',plainHtml()));
+  $('s42ExportAll').addEventListener('click',()=>download('shem42_generated_angels.json','application/json',JSON.stringify(completePayload(),null,2)));
+  $('s42Rule').textContent=SHEM42_DATA.tables.rule; $('s42Iteration').textContent=SHEM42_DATA.tables.iterationRule;
+  $('s42Scope').textContent=SHEM42_DATA.tables.scopeNote;
+  $('s42DivineSource').href=SHEM42_DATA.divine.source;
+  $('s42CorpusCount').textContent=`${SHEM42_DATA.catalogMeta.counts.derivations.toLocaleString('it-IT')} derivazioni, ${SHEM42_DATA.catalogMeta.counts.distinctSpellings.toLocaleString('it-IT')} grafie distinte`;
+  generate();
+  return {generate,render,showRecord,selectionPayload,completePayload,plainHtml,getRecords:()=>records,getVisible:()=>visible};
+})();
+
+</script>
+</body>
+</html>

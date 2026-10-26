@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nome di 42 lettere · Generatore sulle 19 tavole</title>
+<style>
+  :root{color-scheme:dark;--bg:#0d1018;--panel:#171c28;--ink:#ece9df;--muted:#b7b7bb;--gold:#e2c881;--line:#383c47;--cyan:#7dd7ce}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,"Times New Roman",serif}
+  main{max-width:1180px;margin:auto;padding:30px 22px 70px}header{padding:10px 0 22px;border-bottom:1px solid var(--line)}
+  h1{font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.2;margin:7px 0 15px;color:var(--gold)}h2{font-size:1.15rem;color:var(--gold);margin:0 0 14px}
+  p{margin:10px 0}a{color:var(--gold)}.eyebrow{font:12px/1.6 system-ui;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .hebrew{font-family:"Times New Roman","David",serif;direction:rtl;unicode-bidi:isolate;overflow-wrap:anywhere}.source-name{font-size:clamp(1.2rem,3.8vw,1.75rem);line-height:1.9;color:var(--gold)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:22px;min-width:0}
+  .controls{display:grid;grid-template-columns:1.3fr 1fr 1fr .65fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+  label,button,input,select,.small,.toolbar,.stats,.empty{font-family:system-ui,sans-serif}label{font-size:.85rem;color:var(--muted)}
+  button,input,select{font-size:.9rem;color:var(--ink);background:#101621;border:1px solid #62616a;border-radius:6px;padding:9px 11px;max-width:100%}
+  input,select{width:100%;min-width:0}button{cursor:pointer}button:hover{border-color:var(--gold);background:#252a36}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  .primary{background:var(--gold);color:#18191d;border-color:var(--gold);font-weight:600}.primary:hover{background:#f1d99a;color:#18191d}
+  .toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:15px}.toolbar label{display:flex;align-items:center;gap:7px}.toolbar input[type=checkbox]{width:auto}
+  .search{flex:1 1 220px}.stats{display:flex;flex-wrap:wrap;gap:25px;color:var(--muted);font-size:.83rem;margin:18px 0}.stats strong{color:var(--gold);font-size:1.4rem;margin-right:5px}
+  .small{font-size:.8rem;color:var(--muted)}.error{color:#ffb7ad;font-family:system-ui}.results-wrap{overflow-x:auto}table.results{width:100%;border-collapse:collapse;table-layout:fixed}
+  .results th{font:.8rem system-ui;color:var(--muted);text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}.results td{padding:12px 10px;border-bottom:1px solid var(--line);overflow-wrap:anywhere;vertical-align:middle}
+  .results th:first-child{width:48%}.results .name{border:0;background:transparent;padding:0;color:var(--ink);font-size:1.3rem;text-align:right;line-height:1.65;white-space:normal;display:block;width:100%;overflow-wrap:anywhere}
+  .results .name:hover{color:var(--gold)}.meta{font:12px/1.5 system-ui;color:var(--muted)}.pure .meta{display:none}.pure .results th:first-child{width:100%}
+  details>summary{cursor:pointer;color:var(--gold)}.details-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+  .matrix-scroll{overflow-x:auto;padding:8px 0}.matrix-stage{position:relative;min-width:310px;max-width:520px;aspect-ratio:1;background:#101621}
+  .matrix{display:grid;position:absolute;inset:0}.cell{border:1px solid #303845;display:flex;align-items:center;justify-content:center;font-size:var(--cell-font,14px);color:#a4a7b1}.cell.active{color:var(--gold);background:#293d40}
+  .path{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.steps{max-height:540px;overflow:auto;padding-right:8px}.steps p{padding:5px 0;border-bottom:1px solid var(--line);font:13px/1.6 system-ui}
+  .detail-name{font-size:1.5rem;line-height:1.8}.empty{padding:30px 10px;text-align:center;color:var(--muted)}footer{margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}[hidden]{display:none!important}
+  @media(max-width:750px){main{padding:18px 12px 50px}.panel{padding:15px}.controls{grid-template-columns:1fr 1fr}.details-layout{grid-template-columns:minmax(0,1fr)}.results th:first-child{width:42%}.stats{gap:14px}.results td{padding:9px 5px}}
+  @media print{body{background:#fff;color:#000}header,.controls,.toolbar,.stats,footer,#s42Details,#methodNotes,.small,.error{display:none!important}.panel{border:0;padding:0}main{max-width:none;padding:0}.results .name{color:#000}.results td{break-inside:avoid;border-color:#ddd}.meta{color:#333}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="eyebrow">Nome di 42 lettere · Le tue diciannove tavole</div>
+  <h1>Generatore dei nomi dalle celle</h1>
+  <p class="source-name hebrew" dir="rtl"><!-- FULL_NAME --></p>
+  <p>Il Nome completo e i suoi sette gruppi diventano ingressi delle tavole 3×3 → 21×21. Ogni risultato conserva il percorso delle celle da cui è stato ricavato.</p>
+  <p class="small">La lettura numerica adottata è una regola del progetto. Puoi usarla senza data, Sole o Luna.</p>
+</header>
+<section class="panel" aria-label="Generazione">
+  <div class="controls">
+    <label class="field">Nome di partenza<select id="s42Seed"></select></label>
+    <label class="field">Le tue tavole<select id="s42Table"><option value="all">Tutte le 19 tavole</option><option value="classic">3×3 → 9×9</option><option value="higher">10×10 → 21×21</option></select></label>
+    <label class="field">Suffisso<select id="s42Suffix"><option value="אל">אל · El</option><option value="יה">יה · Yah</option><option value="both">אל e יה</option></select></label>
+    <label class="field">Gradi da generare<input id="s42Depth" type="number" min="1" max="9" value="1" required/></label>
+  </div>
+  <div class="toolbar"><button id="s42Generate" class="primary" type="button">Genera dalle tavole</button><span class="small">Per i gradi successivi si reinserisce il nome completo precedente.</span></div>
+  <p id="s42Error" class="error" role="alert" hidden></p>
+</section>
+<section class="panel" id="s42ResultsPanel">
+  <h2>Nomi ricavati</h2>
+  <div class="toolbar">
+    <input id="s42Search" class="search" type="search" placeholder="Cerca nome ebraico o gematria" aria-label="Cerca fra i risultati"/>
+    <label><input id="s42Unique" type="checkbox"/>Una riga per grafia</label>
+    <label><input id="s42HebrewOnly" type="checkbox" checked/>Solo nomi ebraici</label>
+  </div>
+  <div class="stats" aria-live="polite"><span><strong id="s42Paths">0</strong>derivazioni</span><span><strong id="s42Distinct">0</strong>grafie distinte</span><span><strong id="s42Visible">0</strong>righe visibili</span></div>
+  <p class="small">Premi un nome per vedere la tavola e il calcolo. La stessa grafia può provenire da tavole diverse.</p>
+  <div class="results-wrap"><table class="results"><thead><tr><th lang="he" dir="rtl">שם</th><th class="meta">Gematria</th><th class="meta">Ingresso</th><th class="meta">Tavola</th><th class="meta">Grado</th><th class="meta">Suffisso</th></tr></thead><tbody id="s42Rows"></tbody></table></div>
+  <p id="s42Empty" class="empty" hidden>Nessun risultato corrisponde alla ricerca.</p>
+  <div class="toolbar">
+    <button id="s42ExportJson" data-selection-export type="button">Esporta percorsi JSON</button>
+    <button id="s42ExportTxt" data-selection-export type="button">Elenco ebraico TXT</button>
+    <button id="s42ExportHtml" data-selection-export type="button">Elenco ebraico HTML</button>
+  </div>
+</section>
+<section class="panel" id="s42Details" hidden aria-label="Passaggi della derivazione">
+  <div class="toolbar" style="margin-top:0;justify-content:space-between"><h2>La lettura delle celle</h2><button id="s42CloseDetails" type="button">Chiudi</button></div>
+  <div id="s42RecordHeading"></div>
+  <div class="details-layout"><div><div class="matrix-scroll"><div id="s42MatrixStage" class="matrix-stage"></div></div><p class="small">Cerchio: prima lettera. Barra: ultima lettera. Il percorso mostra la lettura del nome in ingresso.</p></div><div id="s42Steps" class="steps"></div></div>
+</section>
+<details class="panel" id="methodNotes">
+  <summary>Regola di costruzione, fonti e corpus completo</summary>
+  <p id="s42Rule"></p><p id="s42Iteration"></p>
+  <p>Le forme finali sono ricondotte alle lettere ordinarie. Le coordinate seguono esattamente le matrici dell’atlante; i numerali letti dalle celle formano il nuovo nome con il suffisso scelto.</p>
+  <p>La variazione del disegno delle matrici cambia il percorso. Tavole con le stesse riduzioni possono produrre nomi uguali: ogni derivazione conserva il proprio ID. I gradi 1–9 sono iterazioni della regola del progetto.</p>
+  <p id="s42Scope"></p>
+  <p><a href="https://www.esotericarchives.com/agrippa/agripp2b.htm#chap22" target="_blank" rel="noopener noreferrer">Agrippa II.22: kamee</a> · <a href="https://www.esotericarchives.com/agrippa/agripp3c.htm#chap30" target="_blank" rel="noopener noreferrer">III.30: lettere e nove camere</a> · <a id="s42DivineSource" target="_blank" rel="noopener noreferrer">Fonte del Nome di 42 lettere</a></p>
+  <p>Il corpus completo usa otto ingressi, diciannove tavole, due suffissi e nove gradi: <strong id="s42CorpusCount"></strong>. La lettura delle celle qui adottata è distinta dalla sostituzione delle colonne planetarie di III.27.</p>
+  <button id="s42ExportAll" type="button">Esporta il corpus completo JSON</button>
+</details>
+<footer class="small"><a href="complete_angel_catalog.html">Catalogo completo per sfera</a> · <a href="angels_12_heavens.html">Atlante delle tavole</a> · <a href="index.html#divineNames42">Nome di 42 lettere</a> · Generatore autonomo, utilizzabile offline.</footer>
+</main>
+<!-- GENERATOR_ENGINE -->
+</body>
+</html>
