@@ -1,0 +1,143 @@
+================================================================================
+LOG DI VERIFICA AUTOMATICA E GEOMETRICA — TAVOLA 22×22 (tavola_et_kol_484.rs)
+Estrazione dei 4 Livelli Concentrici del Nome del Dio Supremo + Teoremi Algebrici & Mispar
+Workspace: C:\Users\asdf\Desktop\alfabeto_malachim_agrippa
+Binary   : binaural_malachim_theta/src/bin/tavola_et_kol_484.rs
+Data     : 2026-10-30
+Stato    : 100% VERIFICATO (6/6 test unitari Rust superati, 0 discrepanze)
+================================================================================
+
+[ESECUZIONE CARGO TEST]
+$ cargo test --bin tavola_et_kol_484
+   Compiling binaural_malachim_theta v0.2.0 (C:\Users\asdf\Desktop\alfabeto_malachim_agrippa\binaural_malachim_theta)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.59s
+     Running unittests src\bin\tavola_et_kol_484.rs
+
+running 6 tests
+test tests::test_1_quattro_angoli_e_cuore_2x2 ... ok
+test tests::test_2_diagonale_principale_e_antidiagonale_19_aleph ... ok
+test tests::test_3_camera_3x3_delle_madri ... ok
+test tests::test_4_incrocio_yhwh_x_ehyeh_nome_di_vita ... ok
+test tests::test_5_integrita_catalogo_103_angeli ... ok
+test tests::test_6_teoremi_algebrici_e_punti_fissi_mispar ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+--------------------------------------------------------------------------------
+LIVELLO 1 — IL METODO DEI 4 ANGOLI E DEL CUORE 2×2: א - ל - כ - ת (451 / 482)
+--------------------------------------------------------------------------------
+Formula generatrice:
+  t[i][j] = (11 * (i + j)) % 21   (con innesto di ת = indice 21 su j = (i+1)%21 e [21,21])
+
+1.1) 4 Angoli Esterni della Tavola 22×22:
+  - NW [1, 1]   (t[0][0])   = א (Aleph, Gematria = 1)
+  - NE [1, 22]  (t[0][21])  = ל (Lamed, Gematria = 30)
+  - SW [22, 1]  (t[21][0])  = כ (Kaph,  Gematria = 20)
+  - SE [22, 22] (t[21][21]) = ת (Tav,   Gematria = 400)
+
+1.2) Cuore Centrale 2×2 ([11..12, 11..12]):
+  - NW [11, 11] (t[10][10]) = כ (Kaph,  Gematria = 20)
+  - NE [11, 12] (t[10][11]) = ת (Tav,   Gematria = 400)
+  - SW [12, 11] (t[11][10]) = א (Aleph, Gematria = 1)
+  - SE [12, 12] (t[11][11]) = ל (Lamed, Gematria = 30)
+
+1.3) Confronto Strutturale:
+                       ⎛ א  ל ⎞                              ⎛ כ  ת ⎞
+    4 Angoli Esterni = ⎝ כ  ת ⎠   ⟷   Cuore Centrale 2 × 2 = ⎝ א  ל ⎠
+  -> ESITO: IDENTICO (100% uguale: inversione esatta tra riga Cielo [א ל] e riga Terra [כ ת]).
+
+1.4) Valori Gematrici e Fattorizzazione:
+  - Riga del Cielo ([1,1]→[1,22] e [12,11]→[12,12]): אֵל (EL) = 1 + 30 = 31
+  - Riga della Corona nel Cuore ([11,11]→[11,12])   : כ-ת = 20 + 400 = 420 (Radice bilittera di כֶּתֶר Kether!)
+  - Diagonale Principale Esterna / Anti-Diag. Cuore: אֵת (ET) = 1 + 400 = 401
+  - Anti-Diagonale Esterna / Diag. Principale Cuore: כֹּל (KOL) = 20 + 30 = 50
+  - Somma dei 4 Cardini (א + ל + כ + ת)           : 1 + 30 + 20 + 400 = 451
+  - Riduzione teosofica                            : 4 + 5 + 1 = 10 -> 1 (Kether)
+  - Fattorizzazione aritmetica                     : 451 = 11 × 41 (11 = chiave della formula; 41 = אֵם EM, la Madre)
+  - Nome completo col suffisso אֵל (אֵת כֹּל אֵל / אכלתאל): 451 + 31 = 482
+
+--------------------------------------------------------------------------------
+LIVELLO 2 — IL METODO DELL'ANTI-DIAGONALE SEGRETA: IL PONTE DELLE 19 א (452)
+--------------------------------------------------------------------------------
+2.1) Diagonale Principale ([1,1] → [22,22]):
+  - Sequenza estratta: א ב ג ד ה ו ז ח ט י כ ל מ נ ס ע פ צ ק ר ש ת (tutte le 22 lettere in ordine)
+  - Somma Gematrica  : 1495 (1 + 4 + 9 + 5 = 19 -> 1 + 9 = 10 -> 1)
+  -> ESITO: IDENTICO (100% uguale).
+
+2.2) Anti-Diagonale ([1,22] NE → [22,1] SW):
+  - Sequenza completa (22 celle):
+    [1,22]=ל | [2,21..10,13]=א,א,א,א,א,א,א,א,א (9 volte א) | [11,12]=ת | [12,11..21,2]=א,א,א,א,א,א,א,א,א,א (10 volte א) | [22,1]=כ
+  - Conteggio celle con א: 9 + 10 = 19 celle su 22!
+  - Centro d'incasto     : [11, 12] = ת (Tav = 400, la Shekhinah)
+  - Estremi              : ל (30) e כ (20) -> כֹּל (KOL = 50)
+  - Nome contratto SW → NE ([22,1] → [1,22]): כ - א - ת - א - ל (KATHAEL — כאתאל)
+  - Nome contratto NE → SW ([1,22] → [22,1]): ל - א - ת - א - כ (LATHAKH — לאתאך)
+  - Gematria del Nome contratto: 20 + 1 + 400 + 1 + 30 = 452
+  - Riscontro in all_tables_angels_atlas.md:121 (Tavola 15×15 di Tiphereth/Sole):
+    Corona (2P = 452) = תכאאל (t·k·ʾ·ʾ·l = 400 + 20 + 1 + 1 + 30 = 452, stesse 5 lettere!)
+  -> ESITO: IDENTICO (100% uguale).
+
+--------------------------------------------------------------------------------
+LIVELLO 3 — LA CAMERA 3×3 DELLE MADRI: אֱמֶת (441) + זֹאת (408) + אמש (341)
+--------------------------------------------------------------------------------
+Intersezione delle 3 Lettere Madri: א (R1/C1), מ (R13/C13), ש (R21/C21)
+
+3.1) Matrice 3×3 estratta da build_et_kol_22x22():
+    ⎛  [1,1]=א(1)     [1,13]=ז(7)    [1,21]=כ(20)  ⎞
+    ⎜ [13,1]=ז(7)    [13,13]=מ(40)  [13,21]=פ(80)  ⎟
+    ⎝ [21,1]=ת(400)  [21,13]=פ(80)  [21,21]=ש(300) ⎠
+
+3.2) Le 3 Linee Maestre:
+  1. Diagonale Principale ([1,1] → [13,13] → [21,21]): א - מ - ש (AMeSh) = 1 + 40 + 300 = 341
+  2. Asse Principio–Centro–Sigillo ([1,1] → [13,13] → [21,1]): א - מ - ת (EMETH) = 1 + 40 + 400 = 441 = 21² = אֶהְיֶה²
+  3. Prima Colonna Verticale ([1,1] → [13,1] → [21,1]): א - ז - ת -> זֹאת (ZOT) = 1 + 7 + 400 = 408 (La Shekhinah)
+  -> ESITO: IDENTICO (100% uguale).
+
+--------------------------------------------------------------------------------
+LIVELLO 4 — INCROCIO יהוה × אהיה: IL NOME DI VITA עהחה (88 → 7)
+--------------------------------------------------------------------------------
+Incrocio tra le righe di י-ה-ו-ה (R10, R5, R6, R5; Gematria = 26)
+e le colonne di א-ה-י-ה (C1, C5, C10, C5; Gematria = 21):
+
+  1. י (R10) × א (C1)  -> t[9][0] = ע (Ayin  = 70, L'Occhio Infinito / Atik Yomin)
+  2. ה (R5)  × ה (C5)  -> t[4][4] = ה (He    = 5,  La Shekhinah Superiore / Binah)
+  3. ו (R6)  × י (C10) -> t[5][9] = ח (Cheth = 8,  Chayim = La Vita)
+  4. ה (R5)  × ה (C5)  -> t[4][4] = ה (He    = 5,  La Shekhinah Inferiore / Malkuth)
+
+  - Tetragramma Segreto estratto: ע - ה - ח - ה (O-Ha-Cha-Ha)
+  - Gematria: 70 + 5 + 8 + 5 = 88 (riduzione teosofica: 8 + 8 = 16 -> 1 + 6 = 7)
+  -> ESITO: IDENTICO (100% uguale).
+
+--------------------------------------------------------------------------------
+TEOREMI ALGEBRICI & PUNTI FISSI DEL MISPAR (test_6)
+--------------------------------------------------------------------------------
+1) Decomposizione Cinese del Sefer Yetzirah (Z_21 ≅ Z_3 × Z_7):
+   - 21 = 3 (Madri) × 7 (Doppie) = אֶהְיֶה (Ehyeh)
+   - Unità invertibili φ(21) = (3-1)(7-1) = 12 (le 12 Semplici Zodiacali)
+   - Somma dei divisori propri di 21: 1 + 3 + 7 = 11 (moltiplicatore della matrice)
+   - Completamento proiettivo: Z_21 ∪ {ת} = 22 Lettere
+
+2) Quasigruppo Mediale del Punto Medio (11 ≡ 2⁻¹ mod 21):
+   - 11 * 2 = 22 ≡ 1 (mod 21) -> i * j = (i + j) / 2 (mod 21)
+   - Diagonale principale: i * i = i (idempotenza)
+   - Anti-diagonale: i + j = 21 -> i * j = 0 = א (le 19 Aleph)
+
+3) Chirurgia Proiettiva di ת e Cifrario Albam sui Margini:
+   - Margine Est (Colonna 22): t[i][21] = (i + 11) % 21 (Cifrario Albam: א -> ל = אֵל)
+   - Margine Sud (Riga 22)   : t[21][j] = (j + 10) % 21 (א -> כ)
+
+4) Legge di Conservazione di Ehyeh (x + inv_x = 21 tra Diretto e Speculare):
+   - Sul Trono Centrale #05 (Malatzel מ-ל-צ <-> Yekahel י-כ-ה):
+     מ(12) + י(9) = 21 | ל(11) + כ(10) = 21 | צ(17) + ה(4) = 21
+
+5) Punti Fissi del Mispar (Regola di Agrippa III.26: V -> number_to_hebrew(V - 31) + "אל"):
+   - Mispar(451): 451 - 31 = 420 = ת(400) + כ(20) -> תכאל (THAKEL, stesse 4 lettere del Cuore 2×2!)
+   - Mispar(452): 452 - 31 = 421 = ת(400) + כ(20) + א(1) -> תכאאל (THAKAAEL, stesse 5 lettere di כאתאל!)
+   - Mispar(482): 482 - 31 = 451 = ת(400) + נ(50) + א(1) -> תנאאל (THANAAEL, dove כ+ל = 50 = נ)
+   - Mispar(441): 441 - 31 = 410 (קֹדֶשׁ Qodesh) = ת(400) + י(10) -> תיאל (THAYEL)
+
+6) Quantizzazione Armonica del Battimento Binaurale (f_0 = 1.08 Hz):
+   - f(א) = 1 × 1.08 = 1.08 Hz
+   - f(מ) = 2 × 1.08 = 2.16 Hz
+   - Media dei 4 Cardini (א, ל, כ, ת) = (1.08 + 6.22 + 3.16 + 2.50) / 4 = 12.96 / 4 = 3.24 Hz = 3 × 1.08 Hz!
+================================================================================
